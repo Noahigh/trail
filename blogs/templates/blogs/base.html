@@ -1,0 +1,85 @@
+<!-- 基础模板 -->
+
+{% load bootstrap3 %}
+
+<! DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     
+    <title>Trail-轨迹</title>
+    
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+      
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+    
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand" href="{% url 'blogs:index' %}" > <span class="glyphicon glyphicon-home"></span> </a>
+      </div>
+
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'blogs:topics' %}" > TOPICS </a></li>
+      </ul>
+
+      <ul class="nav navbar-nav">
+        <li><a href="{% url 'blogs:about' %}" > ABOUT </a></li>
+      </ul>    
+      
+        
+      <ul class="nav navbar-nav navbar-right">
+        {% if user.is_authenticated %}
+          {% if user.username == 'noah' %}
+            <li><a>Hello, <abbr title="Trail-轨迹管理人">{{ user.username }}</abbr>.</a></li>
+          {% else %}
+            <li><a>Hello, <abbr title="Trail-轨迹注册用户">{{ user.username }}</abbr>.</a></li>
+          {% endif %}
+          <li><a href="{% url 'users:logout' %}">Log out</a></li>
+        {% else %}
+          <li><a href="{% url 'users:register' %}">Register</a></li>
+          <li><a href="{% url 'users:login' %}">Log in</a></li>
+        {% endif %}
+      </ul>
+    </div><!-- /.nav-collapse -->
+    
+    </div>
+    </nav>
+      
+</head>
+
+<body style="padding-top: 50px; padding-bottom: 70px">
+
+<div class="container">
+    
+  <div class="page-header">
+    {% block header %}
+    <div class="jumbotron">
+      <h2>Trail - 轨迹</h2>
+      <p>You are so good, why do focus on the secular vision.</p>
+      <p>你那么优秀，何必在意世俗的眼光。</p>  
+    </div>
+    {% endblock header %}
+  </div>
+  <div>
+    {% block content %}{% endblock content %}
+  </div>
+  
+
+</div><!-- /container -->
+    
+</body>
+<footer class="footer navbar-static-bottom">
+    <hr>
+    <p class="text-center">友情链接：<a href="http://glyphicons.com/">Glyphicons</a> <a href="https://v4-alpha.getbootstrap.com/">Bootstrap</a> <a href="">Django</a> <a href="">Python</a></p>
+    <p class="text-center">Trail-轨迹 &copy; 2017</p>
+    
+
+</footer>
+</html>
